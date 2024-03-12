@@ -1,0 +1,46 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.11.1'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Build Docker image
+        run: docker build -t malinatrash/blockchain-frontend .
+
+      - name: Push Docker image to registry
+        run: |
+          docker login -u malinatrash -p ${{ secrets.DOCKER_TOKEN }}
+          docker push malinatrash/blockchain-frontend
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+            docker pull malinatrash/blockchain-frontend
+            docker stop frontend-container || true
+            docker rm frontend-container || true
+            docker run -d -p 80:80 --name frontend-container malinatrash/blockchain-frontend
