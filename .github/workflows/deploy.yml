@@ -41,6 +41,6 @@ jobs:
           script: |
             ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
             docker pull malinatrash/blockchain-frontend
-            docker stop frontend-container || true
-            docker rm frontend-container || true
-            docker run -d -p 80:80 --name frontend-container malinatrash/blockchain-frontend
+            docker stop malinatrash/blockchain-frontend || true
+            docker rm malinatrash/blockchain-frontend || true
+            docker run -d -p 80:80 malinatrash/blockchain-frontend
