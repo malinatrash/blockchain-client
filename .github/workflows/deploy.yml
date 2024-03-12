@@ -43,4 +43,5 @@ jobs:
             docker pull malinatrash/blockchain-frontend
             docker stop malinatrash/blockchain-frontend || true
             docker rm malinatrash/blockchain-frontend || true
+            docker build -t malinatrash/blockchain-frontend .
             docker run -d -p 80:80 malinatrash/blockchain-frontend
