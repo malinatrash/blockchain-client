@@ -33,4 +33,4 @@ jobs:
             git pull
             npm run build
             sudo rm -rf /var/www/blockchain-client/*
-            sudo cp -r dist/* /var/www/blockchain-client
+            sudo mv /root/blockchain-client/dist/* /var/www/blockchain-client/
