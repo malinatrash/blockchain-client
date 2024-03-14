@@ -36,10 +36,13 @@ const Home = () => {
 	return (
 		<div className={wrapper + ' px-12 py-4'}>
 			<div className='flex items-center w-full'>
-				<h1 className='hover:scale-105 font-light  transition-all duration-500 text-[4rem] mobile:text-[3rem]'>
+				<h1 className='hover:scale-105 font-light  transition-all duration-500 text-[4rem] mobile:text-[2rem]'>
 					Blockchain
 				</h1>
-				<img className='w-60 transition-all duration-500' src={Favicon} />
+				<img
+					className='w-60 mobile:scale-50 transition-all duration-500'
+					src={Favicon}
+				/>
 			</div>
 			<div className={content}>
 				{data?.chain ? (
