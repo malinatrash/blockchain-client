@@ -7,7 +7,7 @@ interface PropsButton {
 const Button: FC<PropsButton> = ({ onClick, children }) => {
 	return (
 		<button
-			className='bg-white/40 rounded-md transition-all hover:scale-105 border border-green w-80 h-16 mobile:w-96 mobile:h-12'
+			className='bg-white/60 bg-blend-saturation rounded-md transition-all hover:scale-105 border border-green w-full min-w-80 h-16 mobile:h-12 px-8 min-w-[15rem] mobile:w-96'
 			onClick={onClick}
 		>
 			{children}

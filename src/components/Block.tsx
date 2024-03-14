@@ -1,13 +1,18 @@
+import { FC } from 'react'
 import { BlockData } from '~/models/BlockData'
 
-export const Block = ({
+interface BlockProps
+	extends BlockData,
+		React.HtmlHTMLAttributes<HTMLDivElement> {}
+export const Block: FC<BlockProps> = ({
 	id,
 	previousHash,
 	proof,
 	timestamp,
 	transactions,
+	...props
 }: BlockData) => {
-	const blockStyle = 'max-w-md border rounded-xl p-4 mb-4'
+	const blockStyle = 'max-w-md mobile:max-w-[100vw] border rounded-xl p-4 mb-4'
 
 	const truncatedHash = previousHash
 		? previousHash.length > 8
@@ -18,7 +23,7 @@ export const Block = ({
 		: 'nil'
 
 	return (
-		<div className={blockStyle}>
+		<div {...props} className={blockStyle}>
 			<div className='block-content'>
 				<h2 className='text-xl font-semibold mb-2'>Block ID: {id}</h2>
 				<p className='mb-2 break-all'>
@@ -31,7 +36,6 @@ export const Block = ({
 					<span className='font-semibold'>Timestamp:</span> {timestamp}
 				</p>
 				<div>
-					{/* Показываем количество транзакций, если они определены */}
 					Transactions quantity: {transactions ? transactions.length : 0}
 				</div>
 			</div>
