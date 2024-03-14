@@ -10,7 +10,7 @@ function App() {
 
 	const fetchData = async () => {
 		try {
-			const response = await fetch('http://localhost:8001/chain')
+			const response = await fetch('http://localhost:8080/chain')
 			const jsonData = await response.json()
 			setData(jsonData)
 		} catch (error) {
