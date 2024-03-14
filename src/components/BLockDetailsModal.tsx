@@ -27,40 +27,44 @@ const BlockDetailsModal: FC<BlockDetailsModalProps> = ({
 					</h2>
 					<p className='mb-2'>
 						<span className='font-semibold text-xl'>Block ID:</span>{' '}
-						{blockData.id}
+						{blockData.id ?? ''}
 					</p>
 					<p className='mb-2'>
 						<span className='font-semibold text-xl whitespace-normal'>
 							Previous Hash:
 						</span>{' '}
-						{blockData.previousHash}
+						{blockData.previousHash ?? ''}
 					</p>
 					<p className='mb-2'>
 						<span className='font-semibold text-xl'>Proof:</span>{' '}
-						{blockData.proof}
+						{blockData.proof ?? ''}
 					</p>
 					<p className='mb-2'>
 						<span className='font-semibold text-xl'>Timestamp:</span>{' '}
-						{blockData.timestamp}
+						{blockData.timestamp ?? ''}
 					</p>
 					<h3 className='text-xl font-semibold mt-6 mb-4'>Transactions</h3>
 					<div>
-						{blockData.transactions.map((transaction, index) => (
-							<div key={index} className='bg-gray-100 p-4 rounded-md mb-4'>
-								<p className='mb-2'>
-									<span className='font-semibold'>Amount:</span>{' '}
-									{transaction.amount}
-								</p>
-								<p className='mb-2'>
-									<span className='font-semibold'>Sender:</span>{' '}
-									{transaction.sender}
-								</p>
-								<p className='mb-2'>
-									<span className='font-semibold'>Recipient:</span>{' '}
-									{transaction.recipient}
-								</p>
-							</div>
-						))}
+						{blockData.transactions ? (
+							blockData.transactions.map((transaction, index) => (
+								<div key={index} className='bg-gray-100 p-4 rounded-md mb-4'>
+									<p className='mb-2'>
+										<span className='font-semibold'>Amount:</span>{' '}
+										{transaction.amount}
+									</p>
+									<p className='mb-2'>
+										<span className='font-semibold'>Sender:</span>{' '}
+										{transaction.sender}
+									</p>
+									<p className='mb-2'>
+										<span className='font-semibold'>Recipient:</span>{' '}
+										{transaction.recipient}
+									</p>
+								</div>
+							))
+						) : (
+							<>genesis block</>
+						)}
 					</div>
 					<Button onClick={() => setIsShown(false)}>Close</Button>
 				</div>

@@ -15,7 +15,7 @@ const NewTransactionModal: FC<NewTransactionModalProps> = ({
 }) => {
 	const [amount, setAmount] = useState<number | string>('')
 	const [recipient, setRecipient] = useState<string>('')
-	const [sender, setSender] = useState<string>(getUUID())
+	const [sender] = useState<string>(getUUID())
 
 	const CreateNewTransaction = async (
 		amount: number | string,

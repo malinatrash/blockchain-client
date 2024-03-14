@@ -1,9 +1,10 @@
 import { FC } from 'react'
 import { BlockData } from '~/models/BlockData'
 
-interface BlockProps
-	extends BlockData,
-		React.HtmlHTMLAttributes<HTMLDivElement> {}
+interface BlockProps extends Omit<BlockData, 'id'> {
+	id: number
+}
+
 export const Block: FC<BlockProps> = ({
 	id,
 	previousHash,
@@ -11,7 +12,7 @@ export const Block: FC<BlockProps> = ({
 	timestamp,
 	transactions,
 	...props
-}: BlockData) => {
+}) => {
 	const blockStyle = 'max-w-md mobile:max-w-[100vw] border rounded-xl p-4 mb-4'
 
 	const truncatedHash = previousHash
