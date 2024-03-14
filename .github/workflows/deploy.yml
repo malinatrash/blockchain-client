@@ -18,8 +18,8 @@ jobs:
       #   with:
       #     node-version: '21.x'
 
-      - name: Install dependencies
-        run: npm install
+      # - name: Install dependencies
+      #   run: npm install
 
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
