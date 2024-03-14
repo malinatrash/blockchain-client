@@ -11,6 +11,15 @@ const Home = () => {
 		fetchData()
 	}, [])
 
+	const mine = async () => {
+		try {
+			await fetch('http://92.51.45.202:8080/mine')
+			fetchData()
+		} catch (error) {
+			console.error('Error mine:', error)
+		}
+	}
+
 	const fetchData = async () => {
 		try {
 			const response = await fetch('http://92.51.45.202:8080/chain')
@@ -39,8 +48,8 @@ const Home = () => {
 					<></>
 				)}
 			</div>
-			<div className='fixed bottom-16 flex gap-4'>
-				<Button onClick={() => {}}>MINE</Button>
+			<div className='fixed bottom-16 mobile:bottom-8 flex gap-4 mobile:flex-col mobile:gap-2'>
+				<Button onClick={mine}>MINE</Button>
 				<Button onClick={() => {}}>NEW TRANSACTION</Button>
 			</div>
 		</div>
