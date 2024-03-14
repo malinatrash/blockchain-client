@@ -14,7 +14,6 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm install
           ./deploy.sh
         env:
           VPS_HOST: ${{ secrets.VPS_HOST }}
