@@ -32,7 +32,6 @@ jobs:
             cd /root/blockchain-client
             git fetch
             git pull
-            npm install typescript@latest
-            tsc && npm run build
+            npm run build
             sudo rm -rf /var/www/blockchain-client/*
-            sudo mv /path/to/blockchain-client/dist/* /var/www/blockchain-client/
+            sudo mv /root/blockchain-client/dist/* /var/www/blockchain-client/
