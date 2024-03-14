@@ -30,6 +30,7 @@ jobs:
           script: |
             ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
             cd /root/blockchain-client
+            git fetch
             git pull
             npm run build
             sudo rm -rf /var/www/blockchain-client/*
