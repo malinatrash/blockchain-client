@@ -25,7 +25,7 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: dist/../*
+          source: dist/*
           target: '/var/www/blockchain-client/'
 
       - name: SSH into server and restart NGINX
