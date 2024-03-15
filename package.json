@@ -5,8 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite --host",
-		"build": "npm run build:only",
-		"build:only": "vite build",
+		"build": "eslint . --quiet && vite build",
 		"preview": "vite preview"
 	},
 	"dependencies": {
