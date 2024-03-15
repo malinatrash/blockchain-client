@@ -17,6 +17,7 @@ jobs:
         run: |
           npm install
           npm run build
+          ls -la dist
 
       - name: Copy files to VPS
         uses: appleboy/scp-action@master
