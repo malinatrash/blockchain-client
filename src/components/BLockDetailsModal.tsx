@@ -30,10 +30,10 @@ const BlockDetailsModal: FC<BlockDetailsModalProps> = ({
 						{blockData.id ?? ''}
 					</p>
 					<p className='mb-2'>
-						<span className='font-semibold text-xl whitespace-normal'>
-							Previous Hash:
-						</span>{' '}
-						{blockData.previousHash ?? ''}
+						<span className='font-semibold text-xl'>Previous Hash:</span>{' '}
+						<span className='mobile:break-all'>
+							{blockData.previousHash ?? ''}
+						</span>
 					</p>
 					<p className='mb-2'>
 						<span className='font-semibold text-xl'>Proof:</span>{' '}
@@ -63,7 +63,7 @@ const BlockDetailsModal: FC<BlockDetailsModalProps> = ({
 								</div>
 							))
 						) : (
-							<>genesis block</>
+							<></>
 						)}
 					</div>
 					<Button onClick={() => setIsShown(false)}>Close</Button>

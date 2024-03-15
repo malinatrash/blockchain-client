@@ -1,10 +1,9 @@
-import Loader from '@assets/spinner.png'
 import { useEffect, useState } from 'react'
 import BlockDetailsModal from '~/components/BLockDetailsModal'
-import { Block } from '~/components/Block'
-import Button from '~/components/Button'
+import BlockChain from '~/components/BlockChain'
+import NavigationPanel from '~/components/NavigationPanel'
 import NewTransactionModal from '~/components/NewTransactionModal'
-import { getUUID } from '~/funcs/getUUID'
+import TabBar from '~/components/TabBar'
 import { BlockData } from '~/models/BlockData'
 import { BLockchain } from '~/models/Blockchain'
 
@@ -42,10 +41,8 @@ const Home = () => {
 	}
 	const wrapper =
 		'container flex flex-col max-h-full min-h-screen items-center bg-background select-none'
-	const content =
-		'flex items-center mobile:flex-col transition-all gap-4 flex-wrap justify-center'
 	return (
-		<div className={wrapper + ' px-12 py-4 mobile:px-8'}>
+		<div className={wrapper + ' px-12 py-4 mobile:px-4 mx-auto'}>
 			<NewTransactionModal
 				isShown={newTransactionIsShown}
 				setIsShown={() => setNewTransactionIsShown(!newTransactionIsShown)}
@@ -59,48 +56,20 @@ const Home = () => {
 				<h1 className='hover:scale-105 font-light p-4  transition-all duration-500 text-[5rem] mobile:text-[3rem]'>
 					Blockchain
 				</h1>
-				<div className='flex gap-16'>
-					<span className='text-lg font-bold mobile:hidden'>
-						id: {getUUID()}
-					</span>
-					<span className='text-lg font-bold whitespace-nowrap mobile:text-sm'>
-						Balance: {0}
-					</span>
-				</div>
 			</div>
-			<div className={content}>
-				{isLoading ? (
-					<img
-						className='w-32 animate-spin fixed bottom-1/2 transition-all duration-500 hover:scale-150'
-						src={Loader}
-					/>
-				) : data?.chain ? (
-					data.chain
-						.map((block, index) => (
-							<Block
-								onClick={() => {
-									setCurrentBlockIsShown(true)
-									setCurrentBlock(block)
-								}}
-								key={index}
-								{...block}
-							/>
-						))
-						.reverse()
-				) : (
-					<>No data</>
-				)}
+			<div className='transition-all gap-8 w-full'>
+				<BlockChain
+					data={data}
+					isLoading={isLoading}
+					setCurrentBlock={setCurrentBlock}
+					setCurrentBlockIsShown={setCurrentBlockIsShown}
+				/>
 			</div>
-			<div className='fixed bottom-16 mobile:bottom-8 flex gap-4 mobile:flex-col mobile:gap-2'>
-				<Button onClick={mine}>MINE</Button>
-				<Button
-					onClick={() => {
-						setNewTransactionIsShown(true)
-					}}
-				>
-					NEW TRANSACTION
-				</Button>
-			</div>
+			<NavigationPanel
+				mine={mine}
+				setNewTransactionIsShown={setNewTransactionIsShown}
+			/>
+			<TabBar mine={mine} setNewTransactionIsShown={setNewTransactionIsShown} />
 		</div>
 	)
 }

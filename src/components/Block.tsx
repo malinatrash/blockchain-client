@@ -4,6 +4,7 @@ import { BlockData } from '~/models/BlockData'
 
 interface BlockProps extends Omit<BlockData, 'id'> {
 	id: number
+	onClick: () => void
 }
 
 export const Block: FC<BlockProps> = ({
@@ -12,9 +13,10 @@ export const Block: FC<BlockProps> = ({
 	proof,
 	timestamp,
 	transactions,
-	...props
+	onClick,
 }) => {
-	const blockStyle = 'max-w-md mobile:max-w-[100vw] border rounded-xl p-4 mb-4'
+	const blockStyle =
+		'border rounded-xl p-4 mb-4 transition-all hover:scale-105 hover:shadow-lg min-w-[300px] min-h-[150px]'
 
 	const truncatedHash = previousHash
 		? previousHash.length > 8
@@ -25,22 +27,18 @@ export const Block: FC<BlockProps> = ({
 		: 'nil'
 
 	return (
-		<div {...props} className={blockStyle}>
-			<div className='block-content'>
-				<h2 className='text-xl font-semibold mb-2'>Block ID: {id}</h2>
-				<p className='mb-2 break-all'>
-					<span className='font-semibold'>Previous Hash:</span> {truncatedHash}
-				</p>
-				<p className='mb-2'>
-					<span className='font-semibold'>Proof:</span> {proof}
-				</p>
-				<p className='mb-2'>
-					<span className='font-semibold'>Timestamp:</span> {timestamp}
-				</p>
-				<div>
-					Transactions quantity: {transactions ? transactions.length : 0}
-				</div>
-			</div>
+		<div onClick={onClick} className={blockStyle}>
+			<h2 className='text-xl font-semibold mb-2'>Block ID: {id}</h2>
+			<p className='mb-2 break-all'>
+				<span className='font-semibold'>Previous Hash:</span> {truncatedHash}
+			</p>
+			<p className='mb-2'>
+				<span className='font-semibold'>Proof:</span> {proof}
+			</p>
+			<p className='mb-2'>
+				<span className='font-semibold'>Timestamp:</span> {timestamp}
+			</p>
+			<div>Transactions quantity: {transactions ? transactions.length : 0}</div>
 		</div>
 	)
 }
