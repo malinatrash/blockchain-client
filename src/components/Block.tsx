@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { FC } from 'react'
 import { BlockData } from '~/models/BlockData'
 
@@ -17,9 +18,9 @@ export const Block: FC<BlockProps> = ({
 
 	const truncatedHash = previousHash
 		? previousHash.length > 8
-			? previousHash.substring(0, 4) +
-			  '...' +
-			  previousHash.substring(previousHash.length - 4)
+			? `${previousHash.substring(0, 4)}...${previousHash.substring(
+					previousHash.length - 4
+			  )}`
 			: previousHash
 		: 'nil'
 
