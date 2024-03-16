@@ -2,12 +2,14 @@ import React, { FC } from 'react'
 
 interface PropsButton {
 	onClick: () => void
+	disabled?: boolean
 	children?: React.ReactNode
 }
-const Button: FC<PropsButton> = ({ onClick, children }) => {
+const Button: FC<PropsButton> = ({ onClick, children, disabled }) => {
 	return (
 		<button
-			className='bg-white/60 bg-blend-saturation rounded-md transition-all hover:scale-105 border border-green w-full min-w-80 h-16 mobile:h-12 px-8 min-w-[15rem] mobile:w-96'
+			disabled={disabled}
+			className='bg-white/40 bg-blend-saturation rounded-md transition-all hover:scale-105 border border-green w-full h-16 mobile:h-12 px-4'
 			onClick={onClick}
 		>
 			{children}

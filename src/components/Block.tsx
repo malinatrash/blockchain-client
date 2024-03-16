@@ -16,7 +16,7 @@ export const Block: FC<BlockProps> = ({
 	onClick,
 }) => {
 	const blockStyle =
-		'border rounded-xl p-4 mb-4 transition-all hover:scale-105 hover:shadow-lg min-w-[300px] min-h-[150px]'
+		'border rounded-xl p-4 mb-4 bg-white/60 transition-all hover:scale-105 hover:shadow-lg min-w-[300px] min-h-[150px]'
 
 	const truncatedHash = previousHash
 		? previousHash.length > 8
