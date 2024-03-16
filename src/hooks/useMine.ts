@@ -16,7 +16,7 @@ export const useMine = () => {
 		dispatch(setMining(true))
 		try {
 			dispatch(set(true))
-			const { data } = await fetchMine(address)
+			await fetchMine(address)
 			alert.showAlert({
 				title: 'Block mined',
 				description: 'You get 1 coin!',

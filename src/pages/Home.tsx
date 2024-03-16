@@ -15,8 +15,8 @@ import { BlockData } from '~/models/BlockData'
 
 const Home = () => {
 	const alertData = useAppSelector(state => state.alertReducer)
-	const { currentData, isFetching, refetch } = useChain()
-	const [isLoading, setIsLoading] = useState<boolean>(false)
+	const { currentData } = useChain()
+	const [isLoading] = useState<boolean>(false)
 	const [newTransactionIsShown, setNewTransactionIsShown] = useState(false)
 	const [currentBlock, setCurrentBlock] = useState<BlockData | undefined>(
 		undefined

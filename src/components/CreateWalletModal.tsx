@@ -8,7 +8,7 @@ import Button from './Button'
 const CreateWalletModal = () => {
 	const [copiedAddress, setCopiedAddress] = useState(false)
 	const [copiedKey, setCopiedKey] = useState(false)
-	const { hide, setIsShown } = createWalletSlice.actions
+	const { setIsShown } = createWalletSlice.actions
 	const dispatch = useDispatch()
 	const wallet = useAppSelector(state => state.createWalletSlice)
 
