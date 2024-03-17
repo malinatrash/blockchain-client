@@ -3,7 +3,9 @@ import { BLockchain } from '~/models/Blockchain'
 import { Wallet } from '~/models/Wallet'
 
 const API_URL =
-	import.meta.env.MODE === 'mock' ? '92.51.45.202:8080' : 'localhost:8080'
+	import.meta.env.MODE === 'mock'
+		? 'https://localhost:8080'
+		: 'https://92.51.45.202:8080'
 
 interface GetBalanceResponse {
 	balance: number
