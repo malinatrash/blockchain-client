@@ -4,7 +4,7 @@ import { Wallet } from '~/models/Wallet'
 
 const API_URL = import.meta.env.DEV
 	? 'http://localhost:8080'
-	: 'http://http://92.51.45.202:8080'
+	: 'http://92.51.45.202:8080'
 
 interface GetBalanceResponse {
 	balance: number
