@@ -31,9 +31,9 @@ const NewTransactionModal: FC<NewTransactionModalProps> = ({
 						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify({
-						sender,
-						recipient,
-						amount,
+						sender: sender,
+						recipient: recipient,
+						amount: amount,
 					}),
 				}
 			)
