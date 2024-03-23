@@ -20,13 +20,23 @@ const CreateWalletModal = () => {
 			: 'nil'
 
 	const copyToClipboard = (text: string, type: string) => {
-		navigator.clipboard.writeText(text)
-		if (type === 'address') {
-			setCopiedAddress(true)
-			setTimeout(() => setCopiedAddress(false), 3000)
-		} else if (type === 'privateKey') {
-			setCopiedKey(true)
-			setTimeout(() => setCopiedKey(false), 3000)
+		if (navigator.clipboard && navigator.clipboard.writeText) {
+			navigator.clipboard
+				.writeText(text)
+				.then(() => {
+					if (type === 'address') {
+						setCopiedAddress(true)
+						setTimeout(() => setCopiedAddress(false), 3000)
+					} else if (type === 'privateKey') {
+						setCopiedKey(true)
+						setTimeout(() => setCopiedKey(false), 3000)
+					}
+				})
+				.catch(error => {
+					console.error('Error copying to clipboard:', error)
+				})
+		} else {
+			console.error('Clipboard API not supported')
 		}
 	}
 
