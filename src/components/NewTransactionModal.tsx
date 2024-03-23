@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
-import { getUUID } from '~/funcs/getUUID'
+import { useAppSelector } from '~/hooks/redux'
+import { useAlert } from '~/hooks/useAlert'
+import { useCreateTransactionMutation } from '~/store/api/api'
 import BaseModal from './BaseModal'
 import Button from './Button'
 import TextField from './TextField'
@@ -13,36 +15,41 @@ const NewTransactionModal: FC<NewTransactionModalProps> = ({
 	isShown,
 	setIsShown,
 }) => {
-	const [amount, setAmount] = useState<number | string>('')
+	const senderAddress = useAppSelector(state => state.createWalletSlice.address)
+	const [amount, setAmount] = useState<string>('')
 	const [recipient, setRecipient] = useState<string>('')
-	const [sender] = useState<string>(getUUID())
+	const alert = useAlert()
 
-	const CreateNewTransaction = async (
-		amount: number | string,
-		recipient: string,
-		sender: string
-	) => {
+	const [createTransaction] = useCreateTransactionMutation()
+	const handleCreateTransaction = async () => {
 		try {
-			const response = await fetch(
-				'http://92.51.45.202:8080/transactions/new',
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						sender: sender,
-						recipient: recipient,
-						amount: amount,
-					}),
-				}
-			)
-			console.log(response)
-			if (response.ok) {
-				setIsShown(false)
+			const response = await createTransaction({
+				sender: senderAddress,
+				recipient,
+				amount: parseInt(amount),
+			})
+			if (response.error) {
+				alert.showAlert({
+					description: String(error),
+					shown: true,
+					title: 'Error',
+					type: 'error',
+				})
 			}
+			setIsShown(false)
+			alert.showAlert({
+				description: 'The transaction was successfully sent',
+				shown: true,
+				title: 'Successful',
+				type: 'success',
+			})
 		} catch (error) {
-			alert(error)
+			alert.showAlert({
+				description: String(error),
+				shown: true,
+				title: 'Error',
+				type: 'error',
+			})
 		}
 	}
 
@@ -62,13 +69,7 @@ const NewTransactionModal: FC<NewTransactionModalProps> = ({
 					value={recipient}
 					onChange={e => setRecipient(e.target.value)}
 				/>
-				<Button
-					onClick={async () => {
-						await CreateNewTransaction(amount, recipient, sender)
-					}}
-				>
-					Send
-				</Button>
+				<Button onClick={handleCreateTransaction}>Send</Button>
 			</div>
 		</BaseModal>
 	)

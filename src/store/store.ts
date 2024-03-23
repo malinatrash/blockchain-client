@@ -3,10 +3,12 @@ import { api } from './api/api'
 import alertReducer from './reducers/alertSlice'
 import createWalletSlice from './reducers/createWalletSlice'
 import mineModalReducer from './reducers/mineModalSlice'
+import signInWalletModalReducer from './reducers/signInWalletModalSlice'
 const rootReducer = combineReducers({
 	alertReducer,
 	createWalletSlice,
 	mineModalReducer,
+	signInWalletModalReducer,
 	[api.reducerPath]: api.reducer,
 })
 

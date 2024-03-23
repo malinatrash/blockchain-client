@@ -34,10 +34,27 @@ export const api = createApi({
 				method: 'GET',
 			}),
 		}),
+		uploadFile: builder.mutation<File, FormData>({
+			query: formData => ({
+				url: '/wallet/get',
+				method: 'POST',
+				body: formData,
+			}),
+		}),
 		getBalance: builder.query<GetBalanceResponse, string>({
 			query: (address: string) => ({
 				url: `/balance?address=${address}`,
 				method: 'GET',
+			}),
+		}),
+		createTransaction: builder.mutation<
+			void,
+			{ sender: string; recipient: string; amount: number }
+		>({
+			query: ({ sender, recipient, amount }) => ({
+				url: '/transactions/new',
+				method: 'POST',
+				body: { sender, recipient, amount },
 			}),
 		}),
 	}),
@@ -49,4 +66,6 @@ export const {
 	useGetChainQuery,
 	useLazyGetChainQuery,
 	useGetBalanceQuery,
+	useCreateTransactionMutation,
+	useUploadFileMutation,
 } = api

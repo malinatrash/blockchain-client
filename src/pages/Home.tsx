@@ -7,6 +7,7 @@ import Header from '~/components/Header'
 import MineModal from '~/components/MineModal'
 import NavigationPanel from '~/components/NavigationPanel'
 import NewTransactionModal from '~/components/NewTransactionModal'
+import SignInWalletModal from '~/components/SignInWalletModal'
 import TabBar from '~/components/TabBar'
 import { useAppSelector } from '~/hooks/redux'
 import { useChain } from '~/hooks/useChain'
@@ -31,6 +32,7 @@ const Home = () => {
 	return (
 		<div className={wrapper + ' px-12 py-4 mobile:px-4 mx-auto'}>
 			<MineModal />
+			<SignInWalletModal />
 			<Alert
 				title={alertData.title}
 				description={alertData.description}

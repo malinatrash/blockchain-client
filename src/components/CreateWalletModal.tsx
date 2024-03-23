@@ -51,7 +51,7 @@ const CreateWalletModal = () => {
 							</span>
 						)}
 					</div>
-					<div className='p-2 flex items-center flex-col'>
+					{/* <div className='p-2 flex items-center flex-col'>
 						<span className='py-1 font-bold text-xl'>Private Key:</span>{' '}
 						<span
 							className='block transition-all cursor-pointer hover:scale-110 hover:font-extrabold hover:text-lg'
@@ -64,7 +64,7 @@ const CreateWalletModal = () => {
 								Copied to clipboard!
 							</span>
 						)}
-					</div>
+					</div> */}
 					<Button onClick={() => dispatch(setIsShown(false))}>Ok</Button>
 				</div>
 			</div>

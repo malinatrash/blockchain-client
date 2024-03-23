@@ -7,7 +7,6 @@ export interface CreateWalletState extends Wallet {
 
 const initialState: CreateWalletState = {
 	address: '',
-	privateKey: '',
 	shown: false,
 }
 
@@ -15,10 +14,12 @@ export const createWalletSlice = createSlice({
 	name: 'CreateWallet',
 	initialState,
 	reducers: {
+		setAddress(state, action: PayloadAction<string>) {
+			state.address = action.payload
+		},
 		show(state, action: PayloadAction<CreateWalletState>) {
 			const data = action.payload
 			state.address = data.address
-			state.privateKey = data.privateKey
 			state.shown = true
 		},
 		hide(state) {
